@@ -154,7 +154,7 @@ namespace LINQ_HandsOn
             {
                 15, 8, 21, 24, 32, 13, 30, 12, 7, 54, 48, 4, 49, 96
             };
-            var multiple_of_4_6 = mixedNumbers.Where(multiple => multiple % 4 == 0 && multiple % 6 == 0).Select(multiple => multiple);
+            var multiple_of_4_6 = mixedNumbers.Where(multiple => multiple % 4 == 0 || multiple % 6 == 0).Select(multiple => multiple);
             foreach (var number in multiple_of_4_6)
             {
                 Console.WriteLine(number);
