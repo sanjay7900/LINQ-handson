@@ -71,6 +71,95 @@ namespace LINQ_HandsOn
             }
 
         }
+        public void To_find_the_n_th_Maximum_grade_point_achieved_by_the_students_from_the_list_of_students(int n)
+        {
+            List<Students> stulist = new List<Students>();
+            stulist.Add(new Students { StuId = 1, StuName = " Joseph ", GrPoint = 800 });
+            stulist.Add(new Students { StuId = 2, StuName = "Alex", GrPoint = 458 });
+            stulist.Add(new Students { StuId = 3, StuName = "Harris", GrPoint = 900 });
+            stulist.Add(new Students { StuId = 4, StuName = "Taylor", GrPoint = 900 });
+            stulist.Add(new Students { StuId = 5, StuName = "Smith", GrPoint = 458 });
+            stulist.Add(new Students { StuId = 6, StuName = "Natasa", GrPoint = 700 });
+            stulist.Add(new Students { StuId = 7, StuName = "David", GrPoint = 750 });
+            stulist.Add(new Students { StuId = 8, StuName = "Harry", GrPoint = 700 });
+            stulist.Add(new Students { StuId = 9, StuName = "Nicolash", GrPoint = 597 });
+            stulist.Add(new Students { StuId = 10, StuName = "Jenny", GrPoint = 750 });
+
+            var nthmaxGrPoint = (from stu in stulist orderby stu.GrPoint descending group stu by stu.GrPoint into student select student).Take(n).Reverse().Take(1);
+            foreach (var gr in nthmaxGrPoint)
+            {
+                //Console.WriteLine(gr.Key + " " + gr.Count());
+
+
+                foreach (var student in gr)
+                {
+                    Console.WriteLine(student.StuId + " " + student.StuName + " " + student.GrPoint);
+                }
+
+            }
+         
+
+        }
+        public void people_with_last_name_that_starts_with_the_letter_D(string latter)
+        {
+             List<Person>people = new List<Person>()
+             {
+                 new Person("Bill", "Smith", 41),
+                 new Person("Sarah", "Jones", 22),
+                 new Person("Stacy","Baker", 21),
+                 new Person("Vivianne","Dexter", 19 ),
+                 new Person("Bob","Smith", 49 ),
+                 new Person("Brett","Baker", 51 ),
+                 new Person("Mark","Parker", 19),
+                 new Person("Alice","Thompson", 18),
+                 new Person("Evelyn","Thompson", 58 ),
+                 new Person("Mort","Martin", 58),
+                 new Person("Eugene","DeLauter", 84 ),
+                 new Person("Gail","Dawson", 19 ),
+
+             };
+            var peopleWithlastname = from per in people where per.LastName.StartsWith(latter) select per.LastName;
+            foreach (var person in peopleWithlastname)
+            {
+                
+                Console.WriteLine(person);
+            }
+            int num = (from per in people where per.LastName.StartsWith(latter) select per.LastName).Count();
+
+
+            Console.WriteLine("number of people whose lastname start with D  :"+num);
+
+
+            
+            Console.WriteLine(" 9.	Write linq statement for first Person Older Than 40 In Descending Alphabetical Order By First Name");
+            var names = from per in people orderby per.FirstName ascending where per.Age>40 select per.FirstName;
+            foreach(var person in names)
+            {
+                Console.Write(person+" ");  
+            }
+        }
+        public void Find_the_words_in_the_collection_that_start_with_the_letter_L()
+        {
+            List<string> fruits = new List<string>() { "Lemon", "Apple", "Orange", "Lime", "Watermelon", "Loganberry" };
+            var names = fruits.Where(fr => fr.StartsWith("L")).Select(fr => fr);
+            foreach (var name in names)
+            {
+                Console.WriteLine(name);
+            }
+        }
+
+        public void Which_of_the_following_numbers_are_multiples_of_4_or_6()
+        {
+            List<int> mixedNumbers = new List<int>()
+            {
+                15, 8, 21, 24, 32, 13, 30, 12, 7, 54, 48, 4, 49, 96
+            };
+            var multiple_of_4_6 = mixedNumbers.Where(multiple => multiple % 4 == 0 && multiple % 6 == 0).Select(multiple => multiple);
+            foreach (var number in multiple_of_4_6)
+            {
+                Console.WriteLine(number);
+            }
+        }
 
     }
 }
